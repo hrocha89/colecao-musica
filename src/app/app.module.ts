@@ -3,8 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderModule } from './header/header.module';
+import { MenuModule } from './menu/menu.module';
 import { ButtonCountModule } from './button-count/button-count.module';
+import { FooterModule } from './footer/footer.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,8 +15,11 @@ import { ButtonCountModule } from './button-count/button-count.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HeaderModule,
-    ButtonCountModule
+    MenuModule,
+    FooterModule,
+    ButtonCountModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
