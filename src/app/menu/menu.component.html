@@ -1,24 +1,26 @@
 <!--menu-->
-<nav>
-  <div class="nav-wrapper light-blue">
-    <div class="container">
-      <a href="#" class="brand-logo">
-        <img src="./assets/images/vinil.png" alt="logo">
-      </a>
-      <a href="#" data-target="slide-out" class="sidenav-trigger">
-        <i class="material-icons">menu</i>
-      </a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="#">Albuns</a></li>
-        <li><a href="#">Artistas</a></li>
-        <li><a href="#">Favoritos</a></li>
-      </ul>
+<header *ngIf="menu.length">
+  <nav>
+    <div class="nav-wrapper light-blue">
+      <div class="container">
+        <a href="#" class="brand-logo">
+          <img src="./assets/images/vinil.png" alt="logo">
+        </a>
+        <a href="#" data-target="slide-out" class="sidenav-trigger">
+          <i class="material-icons">menu</i>
+        </a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li *ngFor="let m of menu">
+            <a href="/{{ m.link }}">{{ m.name }}</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<ul id="slide-out" class="sidenav light-blue" #mobile>
-  <li><a href="#"><span class="white-text">Albuns</span></a></li>
-  <li><a href="#"><span class="white-text">Artistas</span></a></li>
-  <li><a href="#"><span class="white-text">Favoritos</span></a></li>
-</ul>
+  <ul id="slide-out" class="sidenav light-blue" #mobile>
+    <li *ngFor="let m of menu">
+      <a href="/{{ m.link }}"><span class="white-text">{{ m.name }}</span></a>
+    </li>
+  </ul>
+</header>

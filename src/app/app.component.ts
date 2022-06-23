@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Album } from './model/album';
 import { Artist } from './model/artist';
+import { Menu } from './model/interface/menu';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,11 @@ export class AppComponent implements OnInit {
   albumEdit: Album = this._newAlbum();
 
   albums: Album[] = [];
+  menu: Menu[];
+
+  constructor() {
+    this.menu = this._getMenu();
+  }
 
   ngOnInit() {
     this.albums = this._getAlbums();
@@ -41,6 +47,14 @@ export class AppComponent implements OnInit {
 
   back() {
     this.showForm = false;
+  }
+
+  private _getMenu(): Menu[] {
+    return [
+      {id: 1, link: 'albums', name: 'Albums'},
+      {id: 2, link: 'artists', name: 'Artistas'},
+      {id: 3, link: 'favorites', name: 'Favoritos'},
+    ]
   }
 
   private _getAlbums(): Album[] {

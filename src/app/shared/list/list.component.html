@@ -1,0 +1,18 @@
+<div class="row" style="padding-top: 8px">
+  <div class="col s6 offset-s6 right-align">
+    <a class="btn-floating btn-large waves-effect waves-light light-blue" routerLink="{{ newUrl }}">
+      <i class="material-icons">add</i>
+    </a>
+  </div>
+</div>
+
+<ul class="collection">
+  <li class="collection-item avatar" *ngFor="let gl of genericList">
+    <img src="assets/images/albums/{{ gl.image }}" alt="{{ gl.title }}" class="circle">
+    <span class="title"> {{ gl.title }} </span>
+    <p> {{ gl.text  }} </p>
+    <a *ngIf="showEdit" class="waves-effect waves-teal btn-floating secondary-content" (click)="edit(gl)">
+      <i class="material-icons">create</i>
+    </a>
+  </li>
+</ul>

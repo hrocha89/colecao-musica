@@ -4,9 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuModule } from './menu/menu.module';
-import { ButtonCountModule } from './button-count/button-count.module';
 import { FooterModule } from './footer/footer.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AlbumsModule } from './albums/albums.module';
+import { LandPageModule } from './land-page/land-page.module';
 
 @NgModule({
   declarations: [
@@ -17,9 +18,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     MenuModule,
     FooterModule,
-    ButtonCountModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AlbumsModule,
+    LandPageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
