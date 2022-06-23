@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Album } from './model/album';
 import { Artist } from './model/artist';
 
@@ -10,26 +9,14 @@ import { Artist } from './model/artist';
 })
 export class AppComponent implements OnInit {
 
-  form!: FormGroup;
-
   showForm: boolean = false;
 
   albumEdit: Album = this._newAlbum();
 
   albums: Album[] = [];
 
-  constructor(private _formBuilder: FormBuilder) {
-  }
-
   ngOnInit() {
-
     this.albums = this._getAlbums();
-
-    this.form = this._formBuilder.group({
-      id: [null, Validators.required],
-      name: [null, Validators.required],
-      year: [null, Validators.required]
-    });
   }
 
   editInfoAlbum(idAlbum: number) {
@@ -53,7 +40,6 @@ export class AppComponent implements OnInit {
   }
 
   back() {
-    this.form.reset();
     this.showForm = false;
   }
 
