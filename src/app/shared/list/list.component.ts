@@ -8,12 +8,13 @@ import { GenericList } from './generic-list';
 export class ListComponent {
 
   @Input() genericList: GenericList[] = [];
-  @Input() showEdit: boolean = true;
+  @Input() showDetail: boolean = true;
   @Input() newUrl!: string;
-  @Output() genericListEmitter = new EventEmitter<GenericList>();
+  @Input() title!: string;
+  @Output() detailEmitter = new EventEmitter<GenericList>();
 
-  edit(gl: GenericList) {
-    this.genericListEmitter.emit(gl);
+  detail(gl: GenericList) {
+    this.detailEmitter.emit(gl);
   }
 
 }

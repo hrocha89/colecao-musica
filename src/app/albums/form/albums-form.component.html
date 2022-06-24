@@ -1,1 +1,29 @@
-<p>teste</p>
+<div class="row">
+  <form class="col s12">
+    <div class="row">
+      <div class="input-field col s8">
+        <input id="album" type="text" class="validate" name="name" [(ngModel)]="album.name">
+        <label for="album">Album</label>
+      </div>
+      <div class="input-field col s4">
+        <input id="ano" type="text" class="validate" name="year" [(ngModel)]="album.year">
+        <label for="ano">Ano</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s6">
+        <button class="waves-effect waves-light btn light-blue" [routerLink]="['/albums']" >
+          <i class="material-icons right">undo</i>Voltar
+        </button>
+      </div>
+
+      <div class="col s6">
+        <button type="submit" class="waves-effect waves-light btn light-green right" (click)="saveAlbum()">
+          <i class="material-icons right">save</i>Salvar
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>

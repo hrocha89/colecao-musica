@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GenericList } from '../../shared/list/generic-list';
 import { Album } from '../../model/album';
-import { Artist } from '../../model/artist';
+import { WebStorageUtil } from '../../util/web-storage-util';
+import { Key } from '../../util/key';
 
 @Component({
   template: `
     <app-list [genericList]="albums"
               [newUrl]="'new'"
-              (genericListEmitter)="edit($event)"></app-list>
+              [title]="'Albums'"
+              (detailEmitter)="detail($event)"></app-list>
   `
 })
 export class AlbumsListComponent implements OnInit {
@@ -24,8 +26,8 @@ export class AlbumsListComponent implements OnInit {
   }
 
 
-  edit(album: GenericList) {
-    this._route.navigate([album?.id, 'edit'], {relativeTo: this._activatedRoute});
+  detail(album: GenericList) {
+    this._route.navigate([album?.id, 'detail'], {relativeTo: this._activatedRoute});
   }
 
   private _getListGeneric = (): GenericList[] => {
@@ -38,11 +40,7 @@ export class AlbumsListComponent implements OnInit {
   }
 
   private _getAlbums = (): Album[] => {
-    return [
-      new Album(1, 'Kind of Blue', new Artist(1, 'Miles Davis'), 1959, 'kind-of-blue.jpg'),
-      new Album(2, 'Volume 3', new Artist(2, 'Trio Corrente'), 2016, 'trio-corrente.jpg'),
-      new Album(3, 'Maiden Voyage', new Artist(3, 'Herbie Hancock'), 1965, 'maiden-voyage.jpg')
-    ]
+    return WebStorageUtil.get(Key.ALBUMS);
   }
 
 }

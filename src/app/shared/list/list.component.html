@@ -1,6 +1,9 @@
-<div class="row" style="padding-top: 8px">
-  <div class="col s6 offset-s6 right-align">
-    <a class="btn-floating btn-large waves-effect waves-light light-blue" routerLink="{{ newUrl }}">
+<div class="row">
+  <div class="col s12 center">
+    {{ title }}
+  </div>
+  <div class="col s12 right-align">
+    <a class="btn-floating right waves-effect waves-light light-green" routerLink="{{ newUrl }}">
       <i class="material-icons">add</i>
     </a>
   </div>
@@ -11,8 +14,8 @@
     <img src="assets/images/albums/{{ gl.image }}" alt="{{ gl.title }}" class="circle">
     <span class="title"> {{ gl.title }} </span>
     <p> {{ gl.text  }} </p>
-    <a *ngIf="showEdit" class="waves-effect waves-teal btn-floating secondary-content" (click)="edit(gl)">
-      <i class="material-icons">create</i>
+    <a *ngIf="showDetail" class="waves-effect waves-teal btn-floating secondary-content" (click)="detail(gl)">
+      <i class="material-icons">details</i>
     </a>
   </li>
 </ul>
