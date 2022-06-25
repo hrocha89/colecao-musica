@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuModule } from './menu/menu.module';
 import { FooterModule } from './footer/footer.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlbumsModule } from './albums/albums.module';
 import { LandPageModule } from './land-page/land-page.module';
 
@@ -21,7 +22,8 @@ import { LandPageModule } from './land-page/land-page.module';
     ReactiveFormsModule,
     FormsModule,
     AlbumsModule,
-    LandPageModule
+    LandPageModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

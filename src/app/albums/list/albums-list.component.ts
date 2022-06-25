@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GenericList } from '../../shared/list/generic-list';
+import { GenericList } from '../../shared/component/list/generic-list';
 import { Album } from '../../model/album';
 import { WebStorageUtil } from '../../util/web-storage-util';
 import { Key } from '../../util/key';
+import { AlbumsService } from '../albums.service';
 
 @Component({
   template: `
@@ -18,12 +19,17 @@ export class AlbumsListComponent implements OnInit {
 
   albums!: GenericList[];
 
-  constructor(private _route: Router,
+  constructor(public service: AlbumsService,
+              private _route: Router,
               private _activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.albums = this._getListGeneric();
+    this.service.findAll().then((albums: Album[]) => {
+      this.albums = albums.map((album) => (Album.toGeneric(album)))
+    }).catch((e) => {
+      console.log('error', e);
+    })
   }
 
 

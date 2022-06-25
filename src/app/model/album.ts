@@ -1,5 +1,6 @@
 import { Artist } from './artist';
 import { Genre } from './genre';
+import { GenericList } from '../shared/component/list/generic-list';
 
 export class Album {
   id: number;
@@ -16,5 +17,14 @@ export class Album {
     this.year = year;
     this.image = image;
     this.genre = genre;
+  }
+
+  static toGeneric(album: Album): GenericList {
+    return {
+      id: album.id,
+      title: `${album.name} - ${album.year}`,
+      text: album.artist.name,
+      image: album.image
+    }
   }
 }
