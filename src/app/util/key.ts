@@ -3,4 +3,5 @@ export class Key {
   static readonly ARTISTS = 'ARTISTS';
   static readonly FAVORITES = 'FAVORITES';
   static readonly MENU = 'MENU';
+  static readonly GENRE = 'GENRE';
 }

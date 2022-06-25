@@ -10,7 +10,8 @@ import { Key } from '../../util/key';
     <app-list [genericList]="albums"
               [newUrl]="'new'"
               [title]="'Albums'"
-              (detailEmitter)="detail($event)"></app-list>
+              (detailEmitter)="detail($event)"
+              (deleteEmitter)="delete($event)"></app-list>
   `
 })
 export class AlbumsListComponent implements OnInit {
@@ -28,6 +29,19 @@ export class AlbumsListComponent implements OnInit {
 
   detail(album: GenericList) {
     this._route.navigate([album?.id, 'detail'], {relativeTo: this._activatedRoute});
+  }
+
+  delete(album: GenericList) {
+    const albums = WebStorageUtil.get(Key.ALBUMS) as Album[];
+
+    const remove = albums.find(a => a.id === album.id)!;
+
+    let indexOf = albums.indexOf(remove);
+    albums.splice(indexOf, 1);
+
+    WebStorageUtil.set(Key.ALBUMS, albums);
+
+    this.albums = this._getListGeneric();
   }
 
   private _getListGeneric = (): GenericList[] => {
