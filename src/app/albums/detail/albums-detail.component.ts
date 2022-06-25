@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Album } from '../../model/album';
-import { WebStorageUtil } from '../../util/web-storage-util';
-import { Key } from '../../util/key';
+import { AlbumsService } from '../albums.service';
 
 
 @Component({
@@ -13,7 +12,8 @@ export class AlbumsDetailComponent implements OnInit {
 
   album!: Album
 
-  constructor(private _route: Router,
+  constructor(public service: AlbumsService,
+              private _route: Router,
               private _activatedRoute: ActivatedRoute,
               private _location: Location) {
   }
@@ -21,9 +21,7 @@ export class AlbumsDetailComponent implements OnInit {
   ngOnInit() {
 
     let idParam = +this._activatedRoute.snapshot.paramMap.get('id')!;
-    const albums = WebStorageUtil.get(Key.ALBUMS) as Album[];
-
-    this.album = albums.find((album) => album.id === idParam)!;
+    this._getAlbum(idParam);
 
   }
 
@@ -33,6 +31,14 @@ export class AlbumsDetailComponent implements OnInit {
 
   back() {
     this._location.back();
+  }
+
+  private _getAlbum(id: number) {
+    this.service.getId(id)
+      .then((a) => this.album = a)
+      .catch((e) => {
+        console.log('Erro!', e);
+      })
   }
 
 }
