@@ -1,6 +1,6 @@
 import { Select } from './select';
 
-export class Artist extends Select {
+export class Genre extends Select {
   id: number;
   name: string;
 

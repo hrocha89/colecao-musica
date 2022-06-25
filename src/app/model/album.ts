@@ -1,5 +1,5 @@
 import { Artist } from './artist';
-import { Genre } from './enum/genre';
+import { Genre } from './genre';
 
 export class Album {
   id: number;
@@ -7,7 +7,7 @@ export class Album {
   artist: Artist;
   year: number;
   image: string;
-  genre: Genre
+  genre: Genre;
 
   constructor(id: number, name: string, artist: Artist, year: number, image: string, genre: Genre) {
     this.id = id;
