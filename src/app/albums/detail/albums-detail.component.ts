@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Album } from '../../model/album';
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Album } from '../../model/album';
 import { WebStorageUtil } from '../../util/web-storage-util';
 import { Key } from '../../util/key';
-import { Location } from '@angular/common';
+
 
 @Component({
   templateUrl: './albums-detail.component.html'
