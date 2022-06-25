@@ -6,8 +6,8 @@ import { FavoriteComponent } from './favorite/favorite.component';
 
 const routes: Routes = [
   {path: '', component: LandPageComponent},
-  {path: 'artist', component: ArtistComponent},
-  {path: 'favorite', component: FavoriteComponent},
+  {path: 'artists', component: ArtistComponent},
+  {path: 'favorites', component: FavoriteComponent},
   {path: 'albums', loadChildren: () => import('./albums/albums.module').then((m) => m.AlbumsModule)}
 ];
 
