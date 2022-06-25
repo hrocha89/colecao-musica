@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Album } from './model/album';
 import { Artist } from './model/artist';
+import { Menu } from './model/interface/menu';
+import { Genre } from './model/enum/genre';
+import { WebStorageUtil } from './util/web-storage-util';
+import { Key } from './util/key';
 
 @Component({
   selector: 'app-root',
@@ -8,51 +12,50 @@ import { Artist } from './model/artist';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  menu!: Menu[];
 
-  showForm: boolean = false;
-
-  albumEdit: Album = this._newAlbum();
-
-  albums: Album[] = [];
+  constructor() {
+    WebStorageUtil.set(Key.MENU, this._createMenu());
+    WebStorageUtil.set(Key.ARTISTS, this._createArtists());
+    WebStorageUtil.set(Key.ALBUMS, this._createAlbums());
+  }
 
   ngOnInit() {
-    this.albums = this._getAlbums();
+    this.menu = WebStorageUtil.get(Key.MENU);
   }
 
-  editInfoAlbum(idAlbum: number) {
-    this.showForm = true;
-
-    this.albumEdit = this.albums.find(a => a.id === idAlbum) || this._newAlbum();
-  }
-
-  saveAlbum() {
-    this.showForm = false;
-
-    if (this.albumEdit && this.albumEdit.id) {
-
-      const remove = this.albums.find(a => a.id === this.albumEdit.id) || this._newAlbum();
-
-      if (remove.id) {
-        this.albums.slice(remove.id - 1, 1);
-      }
-    }
-
-  }
-
-  back() {
-    this.showForm = false;
-  }
-
-  private _getAlbums(): Album[] {
+  private _createMenu(): Menu[] {
     return [
-      new Album(1, 'Kind of Blue', new Artist(1, 'Miles Davis'), 1959, 'kind-of-blue.jpg'),
-      new Album(2, 'Volume 3', new Artist(2, 'Trio Corrente'), 2016, 'trio-corrente.jpg'),
-      new Album(3, 'Maiden Voyage', new Artist(3, 'Herbie Hancock'), 1965, 'maiden-voyage.jpg')
+      {id: 1, link: 'albums', name: 'Albums'},
+      {id: 2, link: 'artists', name: 'Artistas'},
+      {id: 3, link: 'favorites', name: 'Favoritos'},
     ]
   }
 
-  private _newAlbum() {
-    return new Album(0, '', new Artist(0, ''), 0, '');
+  private _createAlbums(): Album[] {
+    return [
+      new Album(1, 'Kind of Blue', this._getArtistsById(1), 1959, 'kind-of-blue.jpg', Genre.JAZZ),
+      new Album(2, 'Dark side of the moon', this._getArtistsById(2), 1973, 'dark-moon.jpg', Genre.ROCK),
+      new Album(3, 'Maiden Voyage', this._getArtistsById(3), 1965, 'maiden-voyage.jpg', Genre.JAZZ),
+      new Album(4, 'Tom & Elis', this._getArtistsById(4), 1974, 'elis-tom.jpg', Genre.MPB),
+      new Album(5, 'Volume 3', this._getArtistsById(5), 2016, 'trio-corrente.jpg', Genre.JAZZ),
+    ]
+  }
+
+  private _createArtists(): Artist[] {
+    return [
+      new Artist(0, ''),
+      new Artist(1, 'Miles Davis'),
+      new Artist(2, 'Pink Floyd'),
+      new Artist(3, 'Herbie Hancock'),
+      new Artist(4, 'Tom Jobim'),
+      new Artist(5, 'Trio Corrente'),
+    ]
+  }
+
+  private _getArtistsById(id: number): Artist {
+    const artists = WebStorageUtil.get(Key.ARTISTS) as Artist[];
+    return artists.find(a => a.id === id) || this._createArtists()[0];
   }
 
 }
