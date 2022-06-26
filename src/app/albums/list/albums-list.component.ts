@@ -33,12 +33,12 @@ export class AlbumsListComponent implements OnInit {
 
   delete(album: GenericList) {
     this.service.delete(album.id)
-      .then()
+      .then(() => {
+        this._getAlbums();
+      })
       .catch((e) => {
         console.log('Erro!', e);
       });
-
-    this._getAlbums();
   }
 
   private _getAlbums() {

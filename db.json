@@ -16,120 +16,41 @@
       "name": "Favoritos"
     }
   ],
-  "genres": [
-    {
-      "id": 1,
-      "name": "Jazz"
-    },
-    {
-      "id": 2,
-      "name": "Rock"
-    },
-    {
-      "id": 3,
-      "name": "MPB"
-    },
-    {
-      "id": 4,
-      "name": "Soul"
-    },
-    {
-      "id": 5,
-      "name": "Clássico"
-    }
-  ],
-  "artists": [
-    {
-      "id": 1,
-      "name": "Miles Davis"
-    },
-    {
-      "id": 2,
-      "name": "Pink Floyd"
-    },
-    {
-      "id": 3,
-      "name": "Herbie Hancock"
-    },
-    {
-      "id": 4,
-      "name": "Tom Jobim"
-    },
-    {
-      "id": 5,
-      "name": "Trio Corrente"
-    }
-  ],
   "albums": [
     {
       "id": 1,
       "name": "Kind of Blue",
-      "artist": {
-        "id": 1,
-        "name": "Miles Davis"
-      },
+      "artist": "Tom Jobim",
       "year": 1959,
-      "image": "kind-of-blue.jpg",
-      "genre": {
-        "id": 1,
-        "name": "Jazz"
-      }
+      "image": "kind-of-blue.jpg"
     },
     {
       "id": 2,
       "name": "Dark side of the moon",
-      "artist": {
-        "id": 2,
-        "name": "Pink Floyd"
-      },
+      "artist": "Pink Floyd",
       "year": 1973,
-      "image": "dark-moon.jpg",
-      "genre": {
-        "id": 2,
-        "name": "Rock"
-      }
+      "image": "dark-moon.jpg"
     },
     {
       "id": 3,
       "name": "Maiden Voyage",
-      "artist": {
-        "id": 3,
-        "name": "Herbie Hancock"
-      },
+      "artist": "Herbie Hancock",
       "year": 1965,
-      "image": "maiden-voyage.jpg",
-      "genre": {
-        "id": 1,
-        "name": "Jazz"
-      }
+      "image": "maiden-voyage.jpg"
     },
     {
       "id": 4,
       "name": "Tom & Elis",
-      "artist": {
-        "id": 4,
-        "name": "Tom Jobim"
-      },
+      "artist": "Tom Jobim",
       "year": 1974,
-      "image": "elis-tom.jpg",
-      "genre": {
-        "id": 3,
-        "name": "MPB"
-      }
+      "image": "elis-tom.jpg"
     },
     {
       "id": 5,
       "name": "Volume 3",
-      "artist": {
-        "id": 5,
-        "name": "Trio Corrente"
-      },
+      "artist": "Trio Corrente",
       "year": 2016,
-      "image": "trio-corrente.jpg",
-      "genre": {
-        "id": 1,
-        "name": "Jazz"
-      }
+      "image": "trio-corrente.jpg"
     }
   ]
 }

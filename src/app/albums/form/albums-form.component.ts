@@ -1,33 +1,19 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as M from 'materialize-css';
 import { Album } from '../../model/album';
-import { WebStorageUtil } from '../../util/web-storage-util';
-import { Key } from '../../util/key';
-import { Artist } from '../../model/artist';
-import { Genre } from '../../model/genre';
-import { Select } from '../../model/select';
+import { AlbumsService } from '../albums.service';
 
 
 @Component({
   templateUrl: './albums-form.component.html'
 })
-export class AlbumsFormComponent implements OnInit, AfterViewInit {
+export class AlbumsFormComponent implements OnInit {
 
-  album!: Album;
-  genres: Genre[];
-  artists: Artist[];
+  album: Album = Album.newAlbum();
 
-  @ViewChild('selectArtist') selectArtist?: ElementRef;
-  @ViewChild('selectGenre') selectGenre?: ElementRef;
-
-  private readonly _albums!: Album[];
-
-  constructor(private _activatedRoute: ActivatedRoute,
+  constructor(public service: AlbumsService,
+              private _activatedRoute: ActivatedRoute,
               private _route: Router) {
-    this._albums = WebStorageUtil.get(Key.ALBUMS) as Album[];
-    this.genres = WebStorageUtil.get(Key.GENRE) as Genre[];
-    this.artists = WebStorageUtil.get(Key.ARTISTS) as Artist[];
   }
 
   ngOnInit() {
@@ -35,39 +21,45 @@ export class AlbumsFormComponent implements OnInit, AfterViewInit {
     let idParam = this._isEdit();
 
     if (idParam) {
-      this.album = this._albums.find((album) => album.id === idParam)!;
+      this.service.getId(idParam)
+        .then((album) => {
+          this.album = album
+        })
+        .catch((e) => {
+          console.log('Erro!', e);
+          this.album = Album.newAlbum();
+        })
     } else {
-      const newId = this._albums.length + 1;
-
-      this.album = new Album(newId, '', this.artists[0], 0, 'padrao.jpg', this.genres[0]);
+      this.album = Album.newAlbum();
     }
 
-  }
-
-  ngAfterViewInit() {
-    M.FormSelect.init(this.selectArtist?.nativeElement);
-    M.FormSelect.init(this.selectGenre?.nativeElement);
   }
 
   saveAlbum() {
 
     if (this._isEdit()) {
-      let albumEdit = this._albums.find(album => album.id === this._isEdit())!;
-      let indexOf = this._albums.indexOf(albumEdit);
+      this.service.update(this.album, this._isEdit())
+        .then((a) => {
+          console.log('Sucesso');
+          this._route.navigateByUrl('albums');
+        })
+        .catch((e) => {
+          console.log('Erro');
+        })
 
-      this._albums.splice(indexOf, 1)
+      return;
     }
 
-    this._albums.push(this.album);
-    this._albums.sort((a, b) => a.id - b.id)
+    this.service.create(this.album)
+      .then((a) => {
+        console.log('Sucesso');
+        this._route.navigateByUrl('albums');
+      })
+      .catch((e) => {
+        console.log('Erro');
+      })
 
-    WebStorageUtil.set(Key.ALBUMS, this._albums);
 
-    this._route.navigateByUrl('albums');
-  }
-
-  compareFnSelect = (a: Select, b: Select) => {
-    return a.id === b.id;
   }
 
   private _isEdit(): number {

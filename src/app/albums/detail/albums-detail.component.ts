@@ -38,6 +38,7 @@ export class AlbumsDetailComponent implements OnInit {
       .then((a) => this.album = a)
       .catch((e) => {
         console.log('Erro!', e);
+        this.album = Album.newAlbum();
       })
   }
 

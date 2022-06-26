@@ -7,6 +7,7 @@ import { AlbumsListComponent } from './list/albums-list.component';
 import { ListModule } from '../shared/component/list/list.module';
 import { AlbumsDetailComponent } from './detail/albums-detail.component';
 import { AlbumsRoutingModule } from './albums-routing.module';
+import { AlbumsService } from './albums.service';
 
 @NgModule({
   imports: [
@@ -20,6 +21,9 @@ import { AlbumsRoutingModule } from './albums-routing.module';
     AlbumsFormComponent,
     AlbumsListComponent,
     AlbumsDetailComponent
+  ],
+  providers: [
+    AlbumsService
   ]
 })
 export class AlbumsModule {
