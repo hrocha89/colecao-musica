@@ -1,4 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 export class CrudService<T> {
 
@@ -15,30 +16,30 @@ export class CrudService<T> {
     this._path = path;
   }
 
-  findAll(): Promise<T[]> {
-    return this.httpClient.get<T[]>(`${this.URL}/${this._path}`).toPromise();
+  findAll(): Observable<T[]> {
+    return this.httpClient.get<T[]>(`${this.URL}/${this._path}`);
   }
 
-  getId(id: number): Promise<T> {
-    return this.httpClient.get<T>(`${this.URL}/${this._path}/${id}`).toPromise();
+  getId(id: number): Observable<T> {
+    return this.httpClient.get<T>(`${this.URL}/${this._path}/${id}`);
   }
 
-  create(entity: T): Promise<T> {
+  create(entity: T): Observable<T> {
     return this.httpClient.post<T>(
       `${this.URL}/${this._path}`,
       JSON.stringify(entity),
-      this.httpOptions).toPromise();
+      this.httpOptions);
   }
 
-  update(entity: T, id: number): Promise<T> {
+  update(entity: T, id: number): Observable<T> {
     return this.httpClient.put<T>(
       `${this.URL}/${this._path}/${id}`,
       JSON.stringify(entity),
-      this.httpOptions).toPromise();
+      this.httpOptions);
   }
 
-  delete(id: number): Promise<void> {
-    return this.httpClient.delete<void>(`${this.URL}/${this.path}/${id}`).toPromise();
+  delete(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.URL}/${this.path}/${id}`);
   }
 
 }

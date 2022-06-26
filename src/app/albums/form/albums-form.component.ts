@@ -21,14 +21,12 @@ export class AlbumsFormComponent implements OnInit {
     let idParam = this._isEdit();
 
     if (idParam) {
-      this.service.getId(idParam)
-        .then((album) => {
-          this.album = album
-        })
-        .catch((e) => {
-          console.log('Erro!', e);
-          this.album = Album.newAlbum();
-        })
+      this.service.getId(idParam).subscribe((album) => {
+        this.album = album;
+      }, error => {
+        console.log('Erro!', error);
+        this.album = Album.newAlbum();
+      });
     } else {
       this.album = Album.newAlbum();
     }
@@ -38,27 +36,21 @@ export class AlbumsFormComponent implements OnInit {
   saveAlbum() {
 
     if (this._isEdit()) {
-      this.service.update(this.album, this._isEdit())
-        .then((a) => {
-          console.log('Sucesso');
-          this._route.navigateByUrl('albums');
-        })
-        .catch((e) => {
-          console.log('Erro');
-        })
-
+      this.service.update(this.album, this._isEdit()).subscribe(() => {
+        console.log('Sucesso');
+        this._route.navigateByUrl('albums');
+      }, () => {
+        console.log('Erro');
+      });
       return;
     }
 
-    this.service.create(this.album)
-      .then((a) => {
-        console.log('Sucesso');
-        this._route.navigateByUrl('albums');
-      })
-      .catch((e) => {
-        console.log('Erro');
-      })
-
+    this.service.create(this.album).subscribe(() => {
+      console.log('Sucesso');
+      this._route.navigateByUrl('albums');
+    }, () => {
+      console.log('Erro');
+    });
 
   }
 

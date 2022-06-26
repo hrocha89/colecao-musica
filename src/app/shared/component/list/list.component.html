@@ -10,7 +10,7 @@
 <ul class="collection">
   <li class="collection-item avatar" *ngFor="let gl of genericList">
     <img src="assets/images/albums/{{ gl.image }}" alt="{{ gl.title }}" class="circle">
-    <span class="title"> {{ gl.title }} </span>
+    <span class="title"> {{ gl.title | uppercase }} </span>
     <p> {{ gl.text  }} </p>
     <a *ngIf="showDetail" class="waves-effect waves-teal btn-floating secondary-content light-blue"
        (click)="detail(gl)" style="margin-right: 50px"><i class="material-icons">details</i>

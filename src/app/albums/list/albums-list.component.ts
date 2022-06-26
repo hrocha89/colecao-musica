@@ -32,22 +32,20 @@ export class AlbumsListComponent implements OnInit {
   }
 
   delete(album: GenericList) {
-    this.service.delete(album.id)
-      .then(() => {
-        this._getAlbums();
-      })
-      .catch((e) => {
-        console.log('Erro!', e);
-      });
+    this.service.delete(album.id).subscribe(() => {
+      this._getAlbums();
+    }, error => {
+      console.log('Erro!', error);
+    })
   }
 
   private _getAlbums() {
-    this.service.findAll().then((albums: Album[]) => {
-      this.albums = albums.map((album) => (Album.toGeneric(album)))
-    }).catch((e) => {
-      console.log('Erro!', e);
+    this.service.findAll().subscribe((albums) => {
+      this.albums = albums.map((album) => (Album.toGeneric(album)));
+    }, error => {
+      console.log('Erro!', error);
       this.albums = [];
-    })
+    });
   }
 
 }
