@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GenericList } from '../../shared/list/generic-list';
+import { GenericList } from '../../shared/component/list/generic-list';
 import { Album } from '../../model/album';
-import { WebStorageUtil } from '../../util/web-storage-util';
-import { Key } from '../../util/key';
+import { AlbumsService } from '../albums.service';
 
 @Component({
   template: `
@@ -18,12 +17,13 @@ export class AlbumsListComponent implements OnInit {
 
   albums!: GenericList[];
 
-  constructor(private _route: Router,
+  constructor(public service: AlbumsService,
+              private _route: Router,
               private _activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.albums = this._getListGeneric();
+    this._getAlbums();
   }
 
 
@@ -32,29 +32,22 @@ export class AlbumsListComponent implements OnInit {
   }
 
   delete(album: GenericList) {
-    const albums = WebStorageUtil.get(Key.ALBUMS) as Album[];
-
-    const remove = albums.find(a => a.id === album.id)!;
-
-    let indexOf = albums.indexOf(remove);
-    albums.splice(indexOf, 1);
-
-    WebStorageUtil.set(Key.ALBUMS, albums);
-
-    this.albums = this._getListGeneric();
+    this.service.delete(album.id)
+      .then(() => {
+        this._getAlbums();
+      })
+      .catch((e) => {
+        console.log('Erro!', e);
+      });
   }
 
-  private _getListGeneric = (): GenericList[] => {
-    return this._getAlbums().map((album) => ({
-      id: album.id,
-      title: `${album.name} - ${album.year}`,
-      text: album.artist.name,
-      image: album.image
-    }))
-  }
-
-  private _getAlbums = (): Album[] => {
-    return WebStorageUtil.get(Key.ALBUMS);
+  private _getAlbums() {
+    this.service.findAll().then((albums: Album[]) => {
+      this.albums = albums.map((album) => (Album.toGeneric(album)))
+    }).catch((e) => {
+      console.log('Erro!', e);
+      this.albums = [];
+    })
   }
 
 }

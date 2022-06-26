@@ -32,30 +32,21 @@
     </div>
 
     <div class="row">
-
       <div class="input-field col s8">
-        <select #selectArtist [(ngModel)]="album.artist" [ngModelOptions]="{standalone: true}" #artist="ngModel"
-                [compareWith]="compareFnSelect" required>
-          <option *ngFor="let a of artists" [ngValue]="a">
-            {{ a.name }}
-          </option>
-        </select>
-        <label>Artista *</label>
+        <input id="artist"
+               type="text"
+               class="validate"
+               name="artist"
+               [(ngModel)]="album.artist"
+               pattern="^(\s?[A-ZÀ-Ú][a-zà-ú]*)+(\s[a-zà-ú]*)?(\s[A-ZÀ-Ú][a-zà-ú]*)+"
+               #artist="ngModel"
+               required>
+        <label for="artist">Artista *</label>
         <div class="red-text" [hidden]="artist.valid || artist.untouched">
-          Por favor, selecione um artista.
+          Por favor, informe o artista.
         </div>
       </div>
 
-      <div class="input-field col s4">
-        <select #selectGenre [(ngModel)]="album.genre" [ngModelOptions]="{standalone: true}" #genre="ngModel"
-                [compareWith]="compareFnSelect" required>
-          <option *ngFor="let g of genres" [ngValue]="g"> {{ g.name }} </option>
-        </select>
-        <label>Gênero Musical *</label>
-        <div class="red-text" [hidden]="genre.valid || genre.untouched">
-          Por favor, selecione um gênero musical.
-        </div>
-      </div>
     </div>
 
     <div class="row">
