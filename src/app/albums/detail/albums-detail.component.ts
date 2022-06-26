@@ -34,12 +34,12 @@ export class AlbumsDetailComponent implements OnInit {
   }
 
   private _getAlbum(id: number) {
-    this.service.getId(id)
-      .then((a) => this.album = a)
-      .catch((e) => {
-        console.log('Erro!', e);
-        this.album = Album.newAlbum();
-      })
+    this.service.getId(id).subscribe((a) => {
+      this.album = a;
+    }, error => {
+      console.log('Erro!', error);
+      this.album = Album.newAlbum();
+    })
   }
 
 }
