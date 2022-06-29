@@ -51,6 +51,13 @@
       "artist": "Trio Corrente",
       "year": 2016,
       "image": "trio-corrente.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Novo Album",
+      "artist": "Caetano Veloso",
+      "year": "2014",
+      "image": "padrao.jpg"
     }
   ]
 }

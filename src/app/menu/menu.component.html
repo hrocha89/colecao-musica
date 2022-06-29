@@ -4,14 +4,14 @@
     <div class="nav-wrapper light-blue">
       <div class="container">
         <a href="#" class="brand-logo">
-          <img src="./assets/images/vinil.png" alt="logo">
+          <img src="assets/images/vinil.png" alt="logo">
         </a>
         <a href="#" data-target="slide-out" class="sidenav-trigger">
           <i class="material-icons">menu</i>
         </a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li *ngFor="let m of menu">
-            <a href="/{{ m.link }}">{{ m.name }}</a>
+            <a href="{{ m.link }}">{{ m.name }}</a>
           </li>
         </ul>
       </div>
@@ -20,7 +20,7 @@
 
   <ul id="slide-out" class="sidenav light-blue" #mobile>
     <li *ngFor="let m of menu">
-      <a href="/{{ m.link }}"><span class="white-text">{{ m.name }}</span></a>
+      <a href="{{ m.link }}"><span class="white-text">{{ m.name }}</span></a>
     </li>
   </ul>
 </header>
