@@ -1,7 +1,7 @@
 # ColecaoMusica
 
-# Protótipo
-
+# Aplicação
+https://hrocha89.github.io/colecao-musica/
 
 # Checklist
 
