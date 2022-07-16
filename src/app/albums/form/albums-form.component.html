@@ -1,0 +1,69 @@
+<div class="row">
+  <form class="col s12" #form="ngForm" (submit)="saveAlbum()">
+    <div class="row">
+      <div class="input-field col s8">
+        <input id="album"
+               type="text"
+               class="validate"
+               name="name"
+               [(ngModel)]="album.name"
+               pattern="([A-ZÀ-Úa-zà-ú0-9\s]+)"
+               #name="ngModel"
+               required>
+        <label for="album">Album *</label>
+        <div class="red-text" [hidden]="name.valid || name.untouched">
+          Por favor, informe o título do album.
+        </div>
+      </div>
+      <div class="input-field col s4">
+        <input id="ano"
+               type="text"
+               class="validate"
+               name="year"
+               [(ngModel)]="album.year"
+               pattern="\d{4}"
+               #year="ngModel"
+               required>
+        <label for="ano">Ano *</label>
+        <div class="red-text" [hidden]="year.valid || year.untouched">
+          Por favor, informe o ano do album.
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s8">
+        <input id="artist"
+               type="text"
+               class="validate"
+               name="artist"
+               [(ngModel)]="album.artist"
+               pattern="^(\s?[A-ZÀ-Ú][a-zà-ú]*)+(\s[a-zà-ú]*)?(\s[A-ZÀ-Ú][a-zà-ú]*)+"
+               #artist="ngModel"
+               required>
+        <label for="artist">Artista *</label>
+        <div class="red-text" [hidden]="artist.valid || artist.untouched">
+          Por favor, informe o artista.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col s6">
+        <button type="button" class="waves-effect waves-light btn light-blue" [routerLink]="['/albums']">
+          <i class="material-icons right">undo</i>Voltar
+        </button>
+      </div>
+
+      <div class="col s6">
+        <button type="submit"
+                class="waves-effect waves-light btn light-green right"
+                [disabled]="form.invalid">
+          <i class="material-icons right">save</i>Salvar
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>
